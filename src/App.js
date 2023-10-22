@@ -7,21 +7,25 @@ import TodoList from './components/TodoList';
 import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
-  const [input, setInput] = useState("");
-  const [todos, setTodos] = useState([]);
+ const[tasks, setTasks] = useState([]);
+
+const addTasks = (task) => {
+  setTasks([...tasks , task]);
+}
+
+const deleteTask = (index) => {
+    const updatedTasks = tasks.filter((_, i) => i !== index);
+    setTasks(updatedTasks);
+}
+
 
   return (
     <div>
       <div className="container">
       <Header/>
-      <Form input={input} 
-      setInput={setInput}
-      todos={todos}
-      setTodos={setTodos}
+      <Form addTasks={addTasks}
       />
-      <TodoList
-      todos={todos}
-      setTodos={setTodos}/>
+      <TodoList tasks={tasks} deleteTask={deleteTask}/>
       </div>
     </div>
   );
@@ -29,4 +33,4 @@ function App() {
 
 export default App;
 
-// https://www.youtube.com/watch?v=dD0MdMRVHoo
+
